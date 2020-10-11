@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Theme.AppCompat.NoActionBar"
+    android:background="@color/white"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/splashImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/coronavirus_icon"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/coronavirus_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_below="@id/splashImage"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/deceased"
+        android:textStyle="bold"
+        android:fontFamily="casual"/>
+
+    <ImageView
+        android:id="@+id/bong_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/bong_logo"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/coronavirus_icon"/>
+
+</RelativeLayout>

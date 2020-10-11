@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Bong COVID Tracker</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="active">Active</string>
+    <string name="recovered">Recovered</string>
+    <string name="deceased">Deceased</string>
+    <string name="last_24_hours">Last 24 Hours</string>
+    <string name="district_wise_data">District Wise Data</string>
+    <string name="zero">0</string>
+    <string name="district">District</string>
+    <string name="confirmed_chart">Confirmed</string>
+    <string name="button_track_districts">Track Districts</string>
+    <string name="updatedon">Updated as on</string>
+    <string name="search">Search</string>
+    <string name="district_name">District Name</string>
+    <string name="coronavirus_icon">Coronavirus Icon</string>
+</resources>

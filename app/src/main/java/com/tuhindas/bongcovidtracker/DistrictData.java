@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,12 +29,15 @@ public class DistrictData extends AppCompatActivity {
     public static List<DistrictModel> districtModelsList = new ArrayList<>();
     DistrictModel districtModel;
     ListCustomAdapter listCustomAdapter;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_district_data);
+
         listView = findViewById(R.id.listView);
+        relativeLayout = findViewById(R.id.relativeLayout);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Districts");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -85,6 +90,13 @@ public class DistrictData extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(DistrictData.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Snackbar.make(relativeLayout, "No connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                fetchData();
+                            }
+                        }).setActionTextColor(getResources().getColor(R.color.colorAccent)).show();
             }
         });
 

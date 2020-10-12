@@ -3,8 +3,8 @@ package com.tuhindas.bongcovidtracker;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 import org.json.JSONArray;
@@ -24,12 +25,14 @@ public class MainActivity extends AppCompatActivity {
     PieChart pieChart;
     JSONArray statewiseData;
     JSONArray statesDailyData;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        relativeLayout = findViewById(R.id.relativeLayout);
         todayDate = findViewById(R.id.todayDate);
         confirmed = findViewById(R.id.confirmed);
         active = findViewById(R.id.active);
@@ -62,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Snackbar.make(relativeLayout, "No connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                fetchData();
+                            }
+                        }).setActionTextColor(getResources().getColor(R.color.colorAccent)).show();
             }
         });
         StringRequest request2 = new StringRequest(Request.Method.GET, statesDailyDataUrl, new Response.Listener<String>() {
@@ -78,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(request1);
